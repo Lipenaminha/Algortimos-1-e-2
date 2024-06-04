@@ -1,0 +1,165 @@
+PROGRAMA COM MENU ,VETOR E ABSTRAÇÃO DE DADOS
+
+//PARTE 1 MAIN
+namespace PROJETAO_PI;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+
+        GerenciadorSapataria ger = new GerenciadorSapataria();
+
+        int opcao = 0;
+
+        do
+        {
+            Console.WriteLine("\n###Menu");
+            Console.WriteLine("[1]Novo");
+            Console.WriteLine("[2]Listar ");
+            Console.WriteLine("[3]Remover ");
+            Console.WriteLine("[4]Entrada Produto ");
+            Console.WriteLine("[5]Saida Produto  ");
+            Console.WriteLine("[0]Sair ");
+            opcao = Convert.ToInt32 (Console.ReadLine());
+
+            if(opcao ==1){
+
+                Tennis tennis = new Tennis();
+
+
+                Console.WriteLine("Digite o nome : ");
+                tennis.Nome = Console.ReadLine();
+
+                Console.WriteLine("Digite o preco : ");
+                tennis.Preco = Convert.ToDouble(Console.ReadLine());
+
+                tennis.Estoque = 0;
+
+                ger.Adicionar(tennis);
+
+            }
+
+            else if(opcao ==2){
+                Console.WriteLine("== Tennis  ==");
+                ger.Listar();
+
+            }
+
+            else if(opcao ==3){
+                ger.Remover();
+            }
+
+            else if(opcao ==4){
+                ger.Entrada();
+            }
+
+            else if(opcao ==5){
+                ger.Saida();
+            }
+
+            else if(opcao ==0){
+                Console.WriteLine("Saindo em 321... ");
+
+            }
+            else{
+                Console.WriteLine("Digite uma posição valida.");
+            }
+
+        }
+            while(opcao != 0);
+            
+    }
+}
+
+//PARTE 2 GERENCIADOR COM FUNÇÕES 
+
+class GerenciadorSapataria
+{
+
+    Tennis[] vetennis = new Tennis[0];
+   
+
+   public void Adicionar(Tennis tennis){
+    Tennis[] tennis1 = new Tennis[vetennis.Length  + 1];
+    for(int i = 0; i < vetennis.Length; i++){
+
+       tennis1[i] = vetennis[i];
+    }
+
+    tennis1 [tennis1.Length -1] = tennis;
+
+    vetennis = tennis1;
+
+   }
+
+    
+    
+    public void Listar()
+    {
+        int cont = 1;
+        foreach(Tennis argur in vetennis){
+
+            Console.WriteLine($"{cont}. {argur.Nome} {argur.Preco} Estoque = {argur.Estoque}");
+            cont ++;
+
+        }
+    }
+
+    public void Remover()
+    {
+        Console.WriteLine("Digite o ID do item para remover : ");
+        int ID = Convert.ToInt32(Console.ReadLine()) -1;
+
+        Tennis[] listaremover = new Tennis[vetennis.Length -1];
+        int cont = 0;
+
+
+             foreach(Tennis produto in vetennis){
+                if(produto != vetennis[ID]){
+                    listaremover[cont] = produto;
+                    cont++;
+                }
+             }
+             Console.WriteLine($"{vetennis[ID].Nome} foi removido!");
+             vetennis = listaremover;
+
+        }
+
+        public void Entrada(){
+            Console.WriteLine("Digite o ID para entrada de estoque : ");
+            int ID = Convert.ToInt32(Console.ReadLine()) -1;
+
+            Console.WriteLine($"Digite a quantidade do produto {vetennis[ID].Nome} : ");
+            int quantidade = Convert.ToInt32(Console.ReadLine());
+
+            vetennis[ID].Estoque = vetennis[ID].Estoque +quantidade;
+    
+            //ABREVIACAO > vetennis[ID].Estoque += quantidade; 
+        }
+
+        public void Saida(){
+            Console.WriteLine("Digite o ID para saida de estoque : ");
+            int ID = Convert.ToInt32(Console.ReadLine()) -1;
+
+            Console.WriteLine($"Digite a quantidade para saida {vetennis[ID].Nome} : ");
+            int saida = Convert.ToInt32(Console.ReadLine());
+
+            vetennis[ID].Estoque -= saida;
+        }
+    }
+    
+// PARTE 3 CLASS TENNIS
+
+class Tennis
+{
+    
+
+    public string ?Nome {get; set;}
+
+    public double Preco {get; set;}
+
+    public int Estoque {get; set;}
+
+
+}
