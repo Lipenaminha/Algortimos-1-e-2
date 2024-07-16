@@ -20,3 +20,49 @@ class Program {
     
   }
 }
+
+/* CONTANDO DO 0 ATÉ O 10 COM RECURSIVIDADE */
+using System;
+
+class Program {
+  public static void Main (string[] args) {
+
+    Contar(0, 10);
+    
+  }
+
+  public static void Contar(int inicio, int fim)
+  {
+    if(inicio == fim){
+      Console.WriteLine(inicio);
+      Console.WriteLine(fim);
+    }
+    else{
+    Console.WriteLine(inicio);
+    Contar(inicio + 1 , fim);
+      }
+   
+    
+  }
+}
+
+/* fatorial de 5 - recursão linear */
+using System;
+
+class Program {
+  public static void Main (string[] args) {
+
+    int f = fatorial_recursao(5);
+    Console.WriteLine(f);
+    
+  }
+
+  public static int fatorial_recursao(int num)
+  {
+    if(num == 1) return 1;
+
+    return num * fatorial_recursao(num -1);
+      
+    }
+   
+  }
