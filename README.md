@@ -1,5 +1,3 @@
-# Program
-RECURSIVIDADE 
 using System;
 
 class Program {
